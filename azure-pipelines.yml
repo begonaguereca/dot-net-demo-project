@@ -20,9 +20,9 @@ jobs:
 
     # Build backend
     - task: DotNetCoreCLI@2
-      displayName: "build function"
+      displayName: "build project"
       inputs:
-        command: publish
+        command: build
         publishWebProjects: false
         projects: "**/*.build-cache-demo.csproj"
         arguments: "--configuration $(Configuration) --no-restore --output $(Build.ArtifactStagingDirectory)"

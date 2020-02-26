@@ -5,15 +5,31 @@
 
 trigger:
 - master
+pr:
+  - master
 
-pool:
-  name: begonaDev
+jobs:
+ - job: test_Job
+   pool:
+      name: "macOS-10.14"
+   steps:
+    - task: UseDotNet@2
+      displayName: "Use .Net Core 2.1.700"
+      inputs:
+        version: 2.1.700
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+    # Build backend
+    - task: DotNetCoreCLI@2
+      displayName: "build function"
+      inputs:
+        command: publish
+        publishWebProjects: false
+        projects: "**/*.build-cache-demo.csproj"
+        arguments: "--configuration $(Configuration) --no-restore --output $(Build.ArtifactStagingDirectory)"
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    #Archive Files
+    - task: PublishBuildArtifacts@1
+      displayName: "publish artifacts"
+      inputs:
+        ArtifactName: ${{ parameters.artifactName }}
+

@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  begona: begonaDev
+  name: begonaDev
 
 steps:
 - script: echo Hello, world!

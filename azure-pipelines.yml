@@ -11,7 +11,7 @@ pr:
 jobs:
  - job: test_Job
    pool:
-      name: "macOS-10.14"
+      name: begonaDev
    steps:
     - task: UseDotNet@2
       displayName: "Use .Net Core 2.1.700"

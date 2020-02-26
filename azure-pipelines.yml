@@ -24,9 +24,7 @@ jobs:
       inputs:
         command: build
         publishWebProjects: false
-        projects: "**/*.build-cache-demo.csproj"
-        arguments: "--configuration $(Configuration) --no-restore --output $(Build.ArtifactStagingDirectory)"
-
+        
     #Archive Files
     - task: PublishBuildArtifacts@1
       displayName: "publish artifacts"
